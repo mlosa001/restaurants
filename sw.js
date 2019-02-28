@@ -4,6 +4,8 @@ self.addEventListener('install', function(e){
 	e.waitUntil(
 		caches.open('v1').then(function(cache){
 			return cache.addAll(cacheFiles);
+			return Promise.resolve("Dummy response to keep the console quiet");
+
 		})
 		);
 
@@ -60,6 +62,7 @@ self.addEventListener('fetch', function(e) {
 		caches.match(e.request).then(function(response){
 			if(response){
 				console.log('Found ', e.request, 'in the cache');
+
 				return response;
 			}
 			//fetch request but add it to cahce for later
@@ -83,3 +86,4 @@ self.addEventListener('fetch', function(e) {
 
 	);
 });
+
